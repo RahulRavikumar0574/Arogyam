@@ -46,7 +46,7 @@ export async function POST(req: Request) {
 
     // Note: phone is collected but not stored yet since User schema doesn't have a phone column.
     // We can add it via migration/SQL later.
-    await prisma.user.create({
+    const created = await prisma.user.create({
       data: {
         name,
         rollNo: employeeId,
@@ -56,7 +56,17 @@ export async function POST(req: Request) {
         gender: gender ?? null,
         instituteName: instituteName ?? null,
       },
+      select: { id: true },
     });
+
+    // Best-effort: store phone if the column exists in the User table
+    try {
+      await prisma.$executeRawUnsafe(
+        'UPDATE "User" SET "phone" = $1 WHERE id = $2',
+        phone,
+        created.id
+      );
+    } catch {}
 
     return NextResponse.json({ success: true });
   } catch (err) {
