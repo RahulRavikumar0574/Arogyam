@@ -91,7 +91,7 @@ export default function DoctorSignupPage() {
         </form>
         <p className="text-sm text-center">
           Already have an account?{" "}
-          <Link href="/login" className="text-blue-500 hover:underline">
+          <Link href="/doctor-login" className="text-blue-500 hover:underline">
             Login
           </Link>
         </p>
