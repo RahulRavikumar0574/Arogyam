@@ -11,7 +11,7 @@ datasource db {
 model User {
   id                 String         @id @default(cuid())
   name               String
-  rollNo             String         @unique // Using for patient ID or doctor employee ID
+  rollNo             String?        @unique // Using for patient ID or doctor employee ID; optional for legacy data
   email              String         @unique
   passwordHash       String
   createdAt          DateTime       @default(now())

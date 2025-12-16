@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await signIn("student-credentials", {
+    const res = await signIn("patient-credentials", {
       email,
       password,
       redirect: false,
@@ -31,11 +31,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-sm bg-[var(--color-surface)] rounded-xl shadow-sm p-6">
-        <h1 className="text-2xl font-semibold mb-1">Student Login</h1>
-        <p className="text-sm text-[var(--color-foreground)]/70 mb-4">Welcome back. Sign in to continue.</p>
+        <h1 className="text-2xl font-semibold mb-1">Login</h1>
+        <p className="text-sm text-[var(--color-foreground)]/70 mb-4">Patients and doctors, sign in to your account.</p>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm mb-1">College email (Gmail)</label>
+            <label className="block text-sm mb-1">Email</label>
             <input
               type="email"
               className="w-full border rounded px-3 py-2 bg-white/80 dark:bg-black/20"

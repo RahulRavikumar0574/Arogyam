@@ -38,3 +38,6 @@ Thumbs.db
 # ML Backend
 ml-backend/.venv
 ml-backend/.venv310
+
+# Local Netlify folder
+.netlify

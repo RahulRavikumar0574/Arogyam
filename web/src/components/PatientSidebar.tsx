@@ -3,12 +3,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Dashboard", href: "/dashboard" },
   { label: "Edit Profile", href: "/dashboard/profile" },
-  { label: "My Doctor", href: "/dashboard/doctor" },
-  { label: "Scheduler", href: "/dashboard/scheduler" },
-  { label: "My Sessions", href: "/dashboard/sessions" },
-  { label: "Messaging", href: "/dashboard/messaging" },
+  { label: "Doctor Page", href: "/dashboard/doctor" },
+  { label: "Report Upload", href: "/dashboard/report-upload" },
+  { label: "Meeting Scheduler", href: "/dashboard/scheduler" },
+  { label: "Chats", href: "/dashboard/messaging" },
+  { label: "Session Records", href: "/dashboard/sessions" },
+  { label: "Customer Support", href: "/dashboard/customer-support" },
 ];
 
 export default function PatientSidebar() {

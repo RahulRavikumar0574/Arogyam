@@ -3,17 +3,17 @@ import Link from "next/link";
 export default function Home() {
   const cards = [
     {
-      title: "Student Portal",
+      title: "Patient Portal",
       desc: "Access your dashboard, sessions, and reports",
-      href: "/login",
-      cta: "Login / Signup",
+      href: "/signup",
+      cta: "Patient Signup",
       accent: "bg-[var(--color-primary)]/10 border-[var(--color-primary)]/30",
     },
     {
-      title: "Counsellor Portal",
-      desc: "Manage students, availability, and messages",
-      href: "/counsellor-signup",
-      cta: "Counsellor Signup",
+      title: "Doctor Portal",
+      desc: "Manage patients, availability, and messages",
+      href: "/doctor-signup",
+      cta: "Doctor Signup",
       accent: "bg-[var(--color-secondary)]/10 border-[var(--color-secondary)]/30",
     },
     {

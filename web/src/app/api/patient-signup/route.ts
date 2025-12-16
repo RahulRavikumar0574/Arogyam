@@ -12,11 +12,13 @@ export async function POST(req: Request) {
     const schema = z.object({
       name: z.string().min(1, "Name is required").trim(),
       gender: z.enum(["MALE", "FEMALE", "OTHER"], { message: "Gender is required" }),
-      instituteName: z.string().min(1, "Institute name is required").trim(),
-      degree: z.string().min(1, "Degree is required").trim(),
-      rollNo: z.string().min(1, "Roll number is required").trim(),
-      age: z.coerce.number().int().min(15, "Age must be at least 15").max(100, "Age must be <= 100"),
+      age: z.coerce.number().int().min(1, "Age is required"),
+      height: z.coerce.number().int().min(1, "Height is required"),
+      weight: z.coerce.number().int().min(1, "Weight is required"),
+      specialCondition: z.string().optional(),
+      address: z.string().min(1, "Address is required").trim(),
       email: z.string().email("Valid email required").transform((e) => e.toLowerCase().trim()),
+      phone: z.string().min(1, "Phone number is required").trim(),
       password: z.string().min(8, "Password must be at least 8 characters"),
       confirmPassword: z.string().min(8, "Confirm password must be at least 8 characters"),
     }).refine((d) => d.password === d.confirmPassword, {
@@ -29,13 +31,13 @@ export async function POST(req: Request) {
       const first = parsed.error.issues[0];
       return NextResponse.json({ error: first.message }, { status: 400 });
     }
-    const { name, gender, instituteName, degree, rollNo, age, email, password } = parsed.data;
+    const { name, gender, age, height, weight, specialCondition, address, email, phone, password } = parsed.data;
 
     const existing = await prisma.user.findFirst({
-      where: { OR: [{ email }, { rollNo }] },
+      where: { email },
     });
     if (existing) {
-      return NextResponse.json({ error: "Email or Roll No already in use" }, { status: 409 });
+      return NextResponse.json({ error: "Email already in use" }, { status: 409 });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -43,14 +45,17 @@ export async function POST(req: Request) {
     const created = await prisma.user.create({
       data: {
         name,
-        rollNo,
         email,
         passwordHash,
         role: Role.PATIENT,
-        gender: gender ?? null,
-        instituteName: instituteName ?? null,
-        degree: degree ?? null,
-        age: typeof age === "number" ? age : null,
+        gender,
+        age,
+        height,
+        weight,
+        specialCondition,
+        address,
+        phone,
+        rollNo: randomUUID(), // Using a random UUID for rollNo as it's not provided in the form
       },
       select: { id: true },
     });
