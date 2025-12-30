@@ -29,16 +29,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-sm bg-[var(--color-surface)] rounded-xl shadow-sm p-6">
-        <h1 className="text-2xl font-semibold mb-1">Login</h1>
-        <p className="text-sm text-[var(--color-foreground)]/70 mb-4">Patients and doctors, sign in to your account.</p>
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md bg-[var(--color-surface)]/95 rounded-2xl shadow-xl border border-white/60 p-6 md:p-8 backdrop-blur-sm space-y-5">
+        <div className="space-y-1">
+          <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]/80">Patient Portal</p>
+          <h1 className="text-2xl md:text-3xl font-semibold mb-1">Sign in</h1>
+          <p className="text-sm text-[var(--color-foreground)]/70">Access your sessions, records, and support tools.</p>
+        </div>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="block text-sm mb-1">Email</label>
             <input
               type="email"
-              className="w-full border rounded px-3 py-2 bg-white/80 dark:bg-black/20"
+              className="w-full border rounded-lg px-3 py-2 bg-white/85 dark:bg-black/20 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/60 focus:border-[var(--color-primary)]/70 text-sm"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -48,7 +51,7 @@ export default function LoginPage() {
             <label className="block text-sm mb-1">Password</label>
             <input
               type="password"
-              className="w-full border rounded px-3 py-2 bg-white/80 dark:bg-black/20"
+              className="w-full border rounded-lg px-3 py-2 bg-white/85 dark:bg-black/20 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/60 focus:border-[var(--color-primary)]/70 text-sm"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -61,15 +64,15 @@ export default function LoginPage() {
           )}
           <button
             type="submit"
-            className="w-full rounded py-2 disabled:opacity-60 bg-[var(--color-primary)] text-white hover:opacity-90 transition"
+            className="w-full rounded-full py-2.5 disabled:opacity-60 bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary)]/90 transition shadow-sm hover:shadow-md text-sm font-medium"
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        <p className="text-sm mt-4">
+        <p className="text-xs md:text-sm text-[var(--color-foreground)]/70 mt-2 text-center">
           Don&apos;t have an account? {" "}
-          <a className="underline text-[var(--color-accent)]" href="/signup">Sign up</a>
+          <a className="font-medium text-[var(--color-accent)] hover:underline" href="/signup">Sign up</a>
         </p>
       </div>
     </div>

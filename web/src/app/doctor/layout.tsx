@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import DoctorSidebar from "@/components/DoctorSidebar";
-import DashboardNavbar from "@/components/DashboardNavbar";
+import DoctorShell from "@/components/DoctorShell";
 
 export default async function DoctorLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -9,13 +8,5 @@ export default async function DoctorLayout({ children }: { children: React.React
   if (!session || role !== "DOCTOR") {
     redirect("/doctor-login");
   }
-  return (
-    <div className="flex min-h-screen">
-      <DoctorSidebar />
-      <div className="flex-1 flex flex-col">
-        <DashboardNavbar />
-        <main className="flex-1 bg-[var(--background)] p-6 overflow-y-auto">{children}</main>
-      </div>
-    </div>
-  );
+  return <DoctorShell>{children}</DoctorShell>;
 }
