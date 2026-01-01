@@ -36,7 +36,7 @@ export default function AdminFlagsPage() {
       {error && <div className="text-sm text-red-600">{error}</div>}
       <div className="border rounded divide-y">
         {items.length === 0 && !loading && (
-          <div className="p-3 text-sm text-muted-foreground">No flagged students.</div>
+          <div className="p-3 text-sm text-muted-foreground">No flagged patients.</div>
         )}
         {items.map((it) => (
           <div key={it.student.id} className="p-3 flex items-center justify-between gap-4">
